@@ -35,12 +35,12 @@
         width:80px;
         height:80px;
         top: 20;
-        left: 30;
+        left: -30;
         position: absolute;
         } 
         .header-title {
             position: absolute;
-            left: 50%;
+            left: 49%;
             transform: translateX(-50%);
             max-width: 200px;  /* Imposta una larghezza massima per evitare che l'immagine diventi troppo grande */
             height: auto;
@@ -291,12 +291,14 @@
               align-items: center;
               justify-content: space-between;
               padding: 0 15px;
+
             }
           
             .logo {
               width: 55px;
               height: 55px;
               position: static;
+              left: -px;
             }
           
             .header-title {
@@ -304,6 +306,9 @@
               height: auto;
               position: static;
               transform: none;
+              left: 10px;
+             
+        
             }
           
             #menu-apri {
