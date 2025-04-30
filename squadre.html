@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince's Cup - FantaEsaSport</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+   
+    
+  
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+     
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="squadre.css">
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="container-fluid">
+      <a href="index.html">
+        <img class="logo" src="immagini/logo prince's cup-08.png" alt="Logo" width="50" height="50" />
+      </a>
+      <img src="immagini/FantaESA-04.png" alt="FantaEsasport" class="header-title" />
+      <button id="menu-apri" class="menu-apri">
+        <a class="burger"><i class="fas fa-bars"></i></a>
+      </button>
+    </header>
+ 
+    <nav class="overlay">
+      <div class="container-overlay">
+        <ul class="menu">
+          <li><a href="squadre.html">Squadre</a></li>
+          <li><a href="risultati.html">Risultati</a></li>
+          <li><a href="classifica.html">Classifica</a></li>
+          <li><a href="statistiche.html">Statistiche</a></li>
+          <!-- 👇 cambia questo link qui -->
+          <li><a href="Regolamento Prince's Cup.pdf" target="_blank">Regolamento</a></li>
+        </ul>
+        <button id="menu-chiudi" class="menu-chiudi">
+          <a class="x">x</a>
+        </button>
+      </div>
+    </nav>
+</nav>
+<div class="container">
+  <div class="section-title">SQUADRE</div>
+  <!-- Squadre -->
+  <div id="squadre"></div>
+</div>
+<div class="spazio-finale"></div>
+  </div>
+<script>
+  const squadreContainer = document.getElementById('squadre');
+  
+
+  // Dati reali delle squadre
+  const squadre = [
+    {
+      nome: "Diblasi s.r.l.",
+      giocatori: ["Vincenzo Mancuso", "Gabriele Aprile", "Michele Mineo", "Andrea Lombardo", "Moussa Traoré", "Gaetano Giandinoto", "Michele Lauretta", "Daniele Laferla", "Angelo Modica", "Giosuè Ragusa"],
+      allenatore: "Attilio Aprile",
+    
+    },
+    {
+      nome: "I Calatini",
+      giocatori: ["Jose Pepè Germano", "Vittorio Aleo", "Mirko Salerno", "Wally Arafa", "Nicola Dottorello", "Marco Cannarozzo", "Alessandro Palazzo", "Kevin Ligama", "Jacopo Gurreri", "Mirko Pavone"],
+allenatore: "Paolo Dottorello",
+    viceallenatore: "Valerio Lauria"
+    },
+    {
+      nome: "La Camera sul Corso",
+      giocatori: ["Andrea Barone", "Danilo Grosso", "Hasni Sayah", "Fabio Attaguile", "Rosario Attaguile", "Mattia D'Amanti", "Damiano Murgo", "Daniele Iudica"]
+    },
+    {
+      nome: "Automotive",
+      giocatori: ["Francesco Novello", "Mario Larocca", "Angelo Occhipinti", "Luca Purità", "Marco Velardita", "Michele Scacciante", "Alessandro Marcinnò", "Michele Divita"],
+      allenatore: "Mario Melina",
+    viceallenatore: "Gaetano Zuccarello"
+    },
+    {
+      nome: "Il Michelangelo",
+      giocatori: ["Mattia Coppoletta", "Edmir Ropaj", "Eugenio Corvaia", "Franco Ali", "Miralì Javadov", "Paolo Gravina", "Paolo Carreno"],
+      allenatore: "Giuseppe Barone",
+  
+    },
+    {
+        nome: "SSD EsaSport",
+      giocatori: ["Salvo Luca", "Vincenzo Occhipinti", "Angelo Salafia", "Angelo Disilvestro", "Maicol Disilvestro", "Salvo Mammana", "Salvo Occhipinti", "Ciro Gaito"],
+      allenatore: "Giuseppe Scapellato",
+    
+    },
+    {
+        nome: "Arti Casearie Nicastro",
+      giocatori: ["Nino Piccolo", "Piero Mammana", "Andrea Rizzo", "Luigi Airò", "Andrea Attaguile", "Michele Costanzo", "Michele Iudica", "Daniele Malaspina"],
+      allenatore: "Alessio Tornello",
+   },
+    {
+        nome: "Snai",
+      giocatori: ["Loris Anfuso", "Matteo Grosso", "Ivan Anfuso", "Luigi Digeronimo", "Danilo Anfuso", "Antonio Palma", "Vincenzo Aquino", "Giulio Lirosi"],
+      allenatore: "Salvo Cannizzo"
+    },
+    {
+      nome: "FantaEsagonale",
+      giocatori: ["Aldo Greco", "Marco Cuius", "Salvo Alberghina", "Simone Buscema", "Enrico Iudica", "Riccardo Ledda", "Danilo Scibona", "Michele Amato","Saro Silvani"],
+      allenatore: "Alessandro Mancuso",
+    
+    },
+    {
+      nome: "Atletico Mirage",
+      giocatori: ["Giacomo Murgo", "Michelangelo Salafia", "Luca Broghiero", "Stefano Sileci", "Simone Dampolo", "Ivan Puccia", "Salvo Lifavi", "Andrea Vitale", "Vincenzo Ballirò", "Mario Laferla"],
+      allenatore: "Michele Raia",
+      viceallenatore: "Giuseppe Calì"
+    
+    },
+    {
+      nome: "StanleyBet",
+      giocatori: ["Rosario Italiano", "Daniele Barone", "Antony Russo", "Daniele Trombino", "Lamin Charty", "Flavio Pinazzo", "Andrea Virga", "Michele Virga"],
+      allenatore: "Michael Chiaramonte",
+    viceallenatore: "Francesco Purità"
+    },
+    {
+      nome: "Impresa Edile Marco Giandinoto",
+      giocatori: ["Gabriele Laferla", "Simone Sinatra", "Michele Mancuso", "Mario Marino", "Diao Diallo", "Alessio Nicastro", "Marco Giandinoto"],
+      allenatore: "Sebastiano Chiovè",
+  
+    },
+    {
+      nome: "Los Cules",
+      giocatori: ["Matteo Cucuzza", "Andrea Borzì", "Riccardo Caruso", "Michael Manenti", "Salvo Galatà", "Claudio Holbea", "Giuseppe Perrotta", "Raffaele Occhipinti"],
+      allenatore: "Mattia Montalto",
+      viceallenatore: "Francesco Inzirillo"
+    },
+    {
+      nome: "BistroWin",
+      giocatori: ["Yessin Abdellatif", "Matteo Salafia", "Yacouba Diakité", "Sassy Fofana", "Fanka Cissé", "Kirolous Soliman", "Abdoulaye Konaté"],
+      allenatore: "Salvo Spada",
+    },
+    
+    // Aggiungi altre squadre qui
+  ];
+
+  squadre.forEach((squadra, i) => {
+    const teamDiv = document.createElement('div');
+    teamDiv.classList.add('team');
+    teamDiv.innerHTML = `
+      <div class="team-number">${i + 1}</div>
+      <div class="team-title">${squadra.nome}</div>
+      <span class="arrow"><i class="fas fa-angle-down"></i></span> <!-- Freccia "<" in grassetto -->
+      <div class="players">
+  <ul>
+    ${squadra.giocatori.map(g => `<li>${g}</li>`).join('')}
+  </ul>
+  <div class="staff">
+    <p><strong>Allenatore:</strong><br> ${squadra.allenatore || '-'}</p>
+    <p><strong>Viceallenatore:</strong><br> ${squadra.viceallenatore || '-'}</p>
+  </div>
+</div>
+
+    `;
+    
+    teamDiv.addEventListener('click', function () {
+  // Chiudi tutte le altre squadre
+  document.querySelectorAll('.team').forEach(el => {
+    if (el !== this) {
+      el.classList.remove('open');
+      el.querySelector('.arrow i').classList.remove('rotate');
+    }
+  });
+
+  // Aggiungi o rimuovi la classe "open" e ruota la freccia
+  this.classList.toggle('open');
+  const icon = this.querySelector('.arrow i');
+  icon.classList.toggle('rotate');
+});
+
+    squadreContainer.appendChild(teamDiv);
+  });
+</script>
+  </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const overlay = document.querySelector(".overlay");
+        const menuApri = document.getElementById("menu-apri");
+        const menuChiudi = document.querySelector(".x");
+
+        // Mostra l'overlay quando clicchi il burger menu
+        menuApri.addEventListener("click", function() {
+            overlay.style.display = "flex";
+        });
+
+        // Nasconde l'overlay quando clicchi la X
+        menuChiudi.addEventListener("click", function() {
+            overlay.style.display = "none";
+        });
+
+        // 👇 Assicurati che all'avvio sia nascosto (per sicurezza extra)
+        overlay.style.display = "none";
+    });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggles = document.querySelectorAll('.dropdown > i');
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const menu = this.nextElementSibling;
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+      });
+    });
+
+    window.addEventListener('click', function() {
+      document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        menu.style.display = 'none';
+      });
+    });
+  });
+</script>
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-logos">
+      <div class="logo-duo">
+        <img src="immagini/logo prince's cup-08.png" alt="Logo torneo" class="logo-footer" />
+        <span class="logo-x">&times;</span>
+        <img src="immagini/FantaESA-04.png" alt="Logo esasport" class="logo-footer logo-societa" />
+      </div>
+      <span>Progetto di <strong>FantaESASport</strong></span>
+    </div>
+
+    <div class="footer-contatti">
+      <div class="dropdown">
+        <i class="fab fa-instagram"></i>
+        <div class="dropdown-menu">
+          <a href="https://www.instagram.com/ssd_esasport/" target="_blank">@SSDEsasport</a>
+          <a href="https://www.instagram.com/fantaesagonale/" target="_blank">@FantaEsagonale</a>
+          <a href="https://www.instagram.com/fantaesasport/" target="_blank">@FantaEsaSport</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <i class="fas fa-phone"></i>
+        <div class="dropdown-menu">
+          <a href="tel:+393285728817">+39 3285728817</a>
+          <a href="tel:+393271113808">+39 3271113808</a>
+        </div>
+      </div>
+      <a href="mailto: fantaesagonale@gmail.com" class="footer-icon">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">Designed by Alessia Buscema</div>
+</footer>
+</footer>
+</body>

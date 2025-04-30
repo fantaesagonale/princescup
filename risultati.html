@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince's Cup - FantaEsaSport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="risultati.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+
+<header class="container-fluid">
+    <a href="index.html">
+        <img class="logo" src="immagini/logo prince's cup-08.png" alt="Logo" width="50" height="50">
+    </a>
+    <img src="immagini/FantaESA-04.png" alt="FantaEsasport" class="header-title">
+    <button id="menu-apri" class="menu-apri">
+        <a class="burger"><i class="fas fa-bars"></i></a>
+    </button>
+</header>
+
+<nav class="overlay">
+    <div class="container-overlay">
+        <ul class="menu">
+            <li><a href="squadre.html">Squadre</a></li>
+            <li><a href="risultati.html">Risultati</a></li>
+            <li><a href="classifica.html">Classifica</a></li>
+            <li><a href="statistiche.html">Statistiche</a></li>
+            <li><a href="Regolamento Prince's Cup.pdf" target="_blank">Regolamento</a></li>
+        <button id="menu-chiudi" class="menu-chiudi">
+            <a class="x">x</a>
+        </button>
+    </div>
+</nav>
+
+<div class="sezione-risultati">
+    <button class="btn-risultati">RISULTATI</button>
+
+    <div class="calendar-bar">
+        <div class="calendar-display" id="calendar-display">Seleziona Data</div>
+      </div>
+  
+      <div class="calendar-popup" id="calendar-popup">
+        <div class="calendar-grid" id="calendar-grid"></div>
+      </div>
+    
+      <div id="blocchiGiornata" class="blocchi-giornata"></div>
+    </section>
+    
+    <div id="modalePartita" class="modale">
+      <div class="contenuto-modale">
+        <span class="chiudi" onclick="chiudiModale()">&times;</span>
+        <img id="immagineDettagli" src="" alt="Dettagli partita" />
+      </div>
+    </div>
+<script>
+const datePartite = [
+  '2025-04-22', '2025-04-23', '2025-04-28', '2025-04-29','2025-04-30',
+  '2025-05-02', '2025-05-06', '2025-05-09', '2025-05-12','2025-05-13','2025-05-14','2025-05-15',
+  '2025-05-16', '2025-05-20', '2025-05-21','2025-05-22','2025-05-26', '2025-05-28','2025-05-30',
+  '2025-06-03', '2025-06-05', '2025-06-07',
+];
+
+const datiPartite = {
+  "2025-04-22": [
+    { data: "22 Aprile - Gruppo A", squadra1: "StanleyBet", gol1: 7, squadra2: "SSD EsaSport", gol2: 2, ora: "19:45" },
+    { data: "22 Aprile - Gruppo A", squadra1: "FantaEsagonale", gol1: 7, squadra2: "Atletico Mirage", gol2: 6, ora: "20:45" },
+    { data: "22 Aprile - Gruppo A", squadra1: "Snai", gol1: "-", squadra2: "Diblasi s.r.l.", gol2: "-", ora: "rinviata al 12/05" }
+  ],
+  "2025-04-23": [
+    { data: "23 Aprile - Gruppo B", squadra1: "Los Cules", gol1: "5", squadra2: "Impresa Edile Marco Giandinoto", gol2: "2", ora: "19:45" },
+    { data: "23 Aprile - Gruppo B", squadra1: "La Camera sul Corso", gol1: "3", squadra2: "BistroWin", gol2: "4", ora: "20:45" },
+    { data: "23 Aprile - Gruppo B", squadra1: "Automotive", gol1: "-", squadra2: "I Calatini", gol2: "-", ora: "rinviata al 06/05" }
+  ],
+  "2025-04-28": [
+    { data: "28 Aprile - Gruppo A", squadra1: "Diblasi s.r.l", gol1: "3", squadra2: "FantaEsagonale", gol2: "1", ora: "19:45" },
+    { data: "28 Aprile - Gruppo A", squadra1: "Arti Casearie Nicastro", gol1: "2", squadra2: "StanleyBet", gol2: "8", ora: "20:45" },
+    { data: "28 Aprile - Gruppo A", squadra1: "SSD EsaSport", gol1: "7(0)", squadra2: "Diblasi s.r.l.", gol2: "7(1)", ora: "21:45" }
+  ],
+  "2025-04-29": [
+    { data: "29 Aprile - Gruppo B", squadra1: "Il Michelangelo", gol1: "5", squadra2: "La Camera sul Corso", gol2: "4", ora: "19:45" },
+    { data: "29 Aprile - Gruppo B", squadra1: "I Calatini", gol1: "7", squadra2: "Los Cules", gol2: "8", ora: "20:45" },
+    { data: "29 Aprile - Gruppo B", squadra1: "BistroWin", gol1: "8", squadra2: "Automotive", gol2: "1", ora: "21:45" }
+  ],
+  "2025-04-30": [
+    { data: "30 Aprile - Gruppo A", squadra1: "SSD EsaSport", gol1: "-", squadra2: "DIblasi s.r.l.", gol2: "-", ora: "19:45" },
+    { data: "30 Aprile - Gruppo A", squadra1: "Arti Casearie Nicastro", gol1: "-", squadra2: "Atletico Mirage", gol2: "-", ora: "20:45" },
+    { data: "30 Aprile - Gruppo A", squadra1: "FantaEsagonale", gol1: "-", squadra2: "StanleyBet", gol2: "-", ora: "21:45" }
+  ],
+  "2025-05-02": [
+    { data: "2 Maggio - Gruppo B", squadra1: "I Calatini", gol1: "-", squadra2: "Impresa Edile Marco Giandinoto", gol2: "-", ora: "19:45" },
+    { data: "2 Maggio - Gruppo B", squadra1: "La Camera sul Corso", gol1: "-", squadra2: "Automotive", gol2: "-", ora: "20:45" },
+    { data: "2 Maggio - Gruppo B", squadra1: "Il Michelangelo", gol1: "-", squadra2: "Los Cules", gol2: "-", ora: "21:45" }
+  ],
+  "2025-05-06": [
+    { data: "6 Maggio - Gruppo A", squadra1: "Automotive", gol1: "-", squadra2: "I Calatini", gol2: "-", ora: "19:45 (recupero)" },
+   
+  ],
+  "2025-05-09": [
+    { data: "9 Maggio - Gruppo B", squadra1: "StanleyBet", gol1: "-", squadra2: "Atletico Mirage", gol2: "-", ora: "19:45" },
+    { data: "9 Maggio - Gruppo B", squadra1: "SSD EsaSport", gol1: "-", squadra2: "FantaEsagonale", gol2: "-", ora: "rinviata al 12/06" }, 
+    { data: "9 Maggio - Gruppo B", squadra1: "Snai", gol1: "-", squadra2: "Arti Casearie Nicastro", gol2: "-", ora: "21:45" }
+  ], 
+  "2025-05-12": [
+    { data: "12 Maggio - Gruppo A", squadra1: "SSd EsaSport", gol1: "-", squadra2: "FantaEsagonale", gol2: "-", ora: "20:45 (recupero)" },
+    { data: "12 Maggio - Gruppo A", squadra1: "Snai", gol1: "-", squadra2: "Diblasi s.r.l.", gol2: "-", ora: "21:45 (recupero)" }
+    
+  ],
+  "2025-05-13": [
+    { data: "13 Maggio - Gruppo B", squadra1: "BistroWin", gol1: "-", squadra2: "I Calatini", gol2: "-", ora: "19:45" },
+    { data: "13 Maggio - Gruppo B", squadra1: "Impresa Edile Marco Giandinoto", gol1: "-", squadra2: "Il Michelangelo", gol2: "-", ora: "20:45" },
+    { data: "13 Maggio - Gruppo B", squadra1: "Los Cules", gol1: "-", squadra2: "La Camera sul Corso", gol2: "-", ora: "21:45" }
+  ],
+  "2025-05-14": [
+    { data: "14 Maggio - Gruppo A", squadra1: "SSD EsaSport", gol1: "-", squadra2: "Arti Casearie Nicastro", gol2: "-", ora: "19:45" },
+    { data: "14 Maggio - Gruppo A", squadra1: "FantaEsagonale", gol1: "-", squadra2: "Diblasi s.r.l.", gol2: "-", ora: "20:45" },
+    { data: "14 Maggio - Gruppo A", squadra1: "Atletico Mirage", gol1: "-", squadra2: "Diblasi s.r.l.", gol2: "-", ora: "21:45" }
+  ],
+  "2025-05-15": [
+    { data: "15 Maggio - Gruppo B", squadra1: "Automotive", gol1: "-", squadra2: "Los Cules", gol2: "-", ora: "19:45" },
+    { data: "15 Maggio - Gruppo B", squadra1: "Impresa Edile Marco Giandinoto", gol1: "-", squadra2: "La Camera sul Corso", gol2: "-", ora: "20:45" },
+    { data: "15 Maggio - Gruppo B", squadra1: "BistroWin", gol1: "-", squadra2: "Il Michelangelo", gol2: "-", ora: "21:45" }
+    
+  ],
+  "2025-05-16": [
+    { data: "16 Maggio - Gruppo A", squadra1: "StanleyBet", gol1: "-", squadra2: "Diblasi s.r.l.", gol2: "-", ora: "19:45" },
+    { data: "16 Maggio - Gruppo A", squadra1: "Arti Casearie Nicastro", gol1: "-", squadra2: "FantaEsagonale", gol2: "-", ora: "20:45" },
+    { data: "16 Maggio - Gruppo A", squadra1: "Atletico Mirage", gol1: "-", squadra2: "Snai", gol2: "-", ora: "21:45" }
+  ],
+  "2025-05-20": [
+   
+  { data: "20 Maggio - Gruppo B", squadra1: "Los Cules", gol1: "-", squadra2: "BistroWin", gol2: "-", ora: "19:45" },
+    { data: "20 Maggio - Gruppo B", squadra1: "I Calatini", gol1: "-", squadra2: "Il Michelangelo", gol2: "-", ora: "20:45" },
+    { data: "20 Maggio - Gruppo B", squadra1: "Automotive", gol1: "-", squadra2: "Impresa Edile Marco Giandinoto", gol2: "-", ora: "21:45" }
+  ],
+  "2025-05-21": [
+  { data: "21 Maggio - Gruppo A", squadra1: "Atletico Mirage", gol1: "-", squadra2: "SSD EsaSport", gol2: "-", ora: "19:45" },
+    { data: "21 Maggio - Gruppo A", squadra1: "Diblasi s.r.l.", gol1: "-", squadra2: "Arti Casearie Nicastro", gol2: "-", ora: "20:45" },
+    { data: "21 Maggio - Gruppo A", squadra1: "Snai", gol1: "-", squadra2: "StanleyBet", gol2: "-", ora: "21:45" }
+  ],
+  "2025-05-22": [
+  { data: "22 Maggio - Gruppo B", squadra1: "La Camera sul Corso", gol1: "-", squadra2: "I Calatini", gol2: "-", ora: "19:45" },
+    { data: "22 Maggio - Gruppo B", squadra1: "Impresa Edile Marco Giandinoto", gol1: "-", squadra2: "BistroWin", gol2: "-", ora: "20:45" },
+    { data: "22 Maggio - Gruppo B", squadra1: "Il Michelangelo", gol1: "-", squadra2: "Automotive", gol2: "-", ora: "21:45" }
+  ],
+  "2025-05-26": [
+  { data: "26 Maggio", squadra1: "Quarto di finale andata", gol1: "-", squadra2: "", gol2: "-", ora: "19:30" },
+    { data: "26 Maggio", squadra1: "Quarto di finale andata", gol1: "-", squadra2: "", gol2: "-", ora: "20:30" },
+    { data: "26 Maggio", squadra1: "Quarto di finale andata", gol1: "-", squadra2: "", gol2: "-", ora: "21:30" },
+    { data: "26 Maggio", squadra1: "Quarto di finale andata", gol1: "-", squadra2: "", gol2: "-", ora: "22:30" }
+  ],
+  "2025-05-28": [
+  { data: "28 Maggio", squadra1: "Quarto di finale ritorno", gol1: "-", squadra2: "", gol2: "-", ora: "19:30" },
+    { data: "28 Maggio", squadra1: "Quarto di finale ritorno", gol1: "-", squadra2: "", gol2: "-", ora: "20:30" },
+    { data: "28 Maggio", squadra1: "Quarto di finale ritorno", gol1: "-", squadra2: "", gol2: "-", ora: "21:30" },
+    { data: "28 Maggio", squadra1: "Quarto di finale ritorno", gol1: "-", squadra2: "", gol2: "-", ora: "22:30" }
+  ],
+  "2025-05-30": [
+  { data: "30 Maggio", squadra1: "Semifinale andata", gol1: "-", squadra2: "", gol2: "-", ora: "20:30" },
+  { data: "30 Maggio", squadra1: "Semifinale andata", gol1: "-", squadra2: "", gol2: "-", ora: "21:30" },
+  ],
+  "2025-06-03": [
+  { data: "3 Giugno", squadra1: "Semifinale ritorno", gol1: "-", squadra2: "", gol2: "-", ora: "20:30" },
+  { data: "3 Giugno", squadra1: "Semifinale ritorno", gol1: "-", squadra2: "", gol2: "-", ora: "21:30" },
+  ],
+  "2025-06-05": [
+    { data: "5 Giugno", squadra1: "Finale 3° posto", gol1: "-", squadra2: "-", gol2: "-", ora: "20:30" }
+  ],
+  "2025-06-07": [
+    { data: "7 Giugno", squadra1: "Finale 1° posto", gol1: "-", squadra2: "-", gol2: "-", ora: "20:00" }
+  ]
+};
+
+
+
+const calendarDisplay = document.getElementById('calendar-display');
+const calendarPopup = document.getElementById('calendar-popup');
+const calendarGrid = document.getElementById('calendar-grid');
+const blocchiGiornata = document.getElementById('blocchiGiornata');
+
+let dataCorrente = trovaDataProssima(); // nuova variabile globale!
+
+// Mostra il calendario iniziale
+aggiornaCalendario();
+caricaPartite(formattaNomeData(dataCorrente));
+calendarDisplay.textContent = formattaData(dataCorrente);
+
+// Apri/chiudi calendario
+calendarDisplay.addEventListener('click', () => {
+  calendarPopup.style.display = (calendarPopup.style.display === 'block') ? 'none' : 'block';
+});
+
+document.addEventListener('click', function(e) {
+  if (!calendarPopup.contains(e.target) && !calendarDisplay.contains(e.target)) {
+    calendarPopup.style.display = 'none';
+  }
+});
+
+// Funzioni
+function aggiornaCalendario() {
+  calendarGrid.innerHTML = '';
+
+  ['Aprile', 'Maggio', 'Giugno'].forEach((mese, idx) => {
+    const divMese = document.createElement('div');
+    divMese.style.gridColumn = 'span 7';
+    divMese.style.fontWeight = 'bold';
+    divMese.style.marginTop = '10px';
+    divMese.textContent = mese;
+    calendarGrid.appendChild(divMese);
+
+    let giorniMese = (idx === 1) ? 31 : (idx === 2) ? 30 : 30;
+    for (let giorno = 1; giorno <= giorniMese; giorno++) {
+      const dataCompleta = `2025-${String(idx+4).padStart(2, '0')}-${String(giorno).padStart(2, '0')}`;
+      const bottone = document.createElement('button');
+      bottone.textContent = giorno;
+
+      if (datePartite.includes(dataCompleta)) {
+        bottone.classList.add('active');
+        bottone.onclick = () => selezionaData(dataCompleta);
+      }
+      calendarGrid.appendChild(bottone);
+    }
+  });
+}
+
+
+function selezionaData(dataString) {
+  calendarPopup.style.display = 'none';
+  caricaPartite(dataString);
+  calendarDisplay.textContent = formattaData(dataString); // 👈 aggiorno il testo del bottone!
+}
+
+function trovaDataProssima() {
+  const oggi = new Date();
+  for (let dataString of datePartite) {
+    if (new Date(dataString) >= oggi) {
+      return new Date(dataString);
+    }
+  }
+  return new Date(datePartite[0]);
+}
+
+function caricaPartite(dataString) {
+  const partite = datiPartite[dataString] || [];
+  blocchiGiornata.innerHTML = '';
+
+  partite.forEach((partita, index) => {
+    const blocco = document.createElement('div');
+    blocco.className = "blocco-partita";
+
+    blocco.onclick = function() {
+      const imgPath = `immagini/partite/partita-${dataString.replace(/-/g, '')}-${index + 1}.png`;
+      apriModale(imgPath);
+    };
+
+    const infoSquadre = document.createElement('div');
+    infoSquadre.className = "info-squadre";
+
+    const match1 = document.createElement('div');
+    match1.className = "match";
+
+    match1.innerHTML = `
+      <div class="squadra">${partita.squadra1}</div>
+      <div class="punteggio">${partita.gol1}</div>
+    `;
+
+    const match2 = document.createElement('div');
+    match2.className = "match";
+
+    match2.innerHTML = `
+      <div class="squadra">${partita.squadra2}</div>
+      <div class="punteggio">${partita.gol2}</div>
+    `;
+
+    const orario = document.createElement('div');
+    orario.className = "orario";
+    orario.textContent = partita.ora;
+
+    infoSquadre.appendChild(match1);
+    infoSquadre.appendChild(match2);
+
+    blocco.appendChild(infoSquadre);
+    blocco.appendChild(orario);
+
+    blocchiGiornata.appendChild(blocco);
+  });
+}
+
+function apriModale(percorsoImmagine) {
+  const modale = document.getElementById('modalePartita');
+  const immagine = document.getElementById('immagineDettagli');
+  immagine.src = percorsoImmagine;
+  modale.style.display = 'flex';
+}
+
+function chiudiModale() {
+  document.getElementById('modalePartita').style.display = 'none';
+}
+
+function formattaData(dataInput) {
+  const date = (typeof dataInput === "string") ? new Date(dataInput) : dataInput;
+  const giorno = String(date.getDate()).padStart(2, '0');
+  const mese = String(date.getMonth() + 1).padStart(2, '0');
+  const anno = date.getFullYear();
+  return `${giorno}/${mese}/${anno}`;
+}
+
+function formattaNomeData(dataInput) {
+  if (typeof dataInput === "string") return dataInput;
+  const giorno = String(dataInput.getDate()).padStart(2, '0');
+  const mese = String(dataInput.getMonth() + 1).padStart(2, '0');
+  const anno = dataInput.getFullYear();
+  return `${anno}-${mese}-${giorno}`;
+}
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const overlay = document.querySelector(".overlay");
+        const menuApri = document.getElementById("menu-apri");
+        const menuChiudi = document.querySelector(".x");
+    
+        menuApri.addEventListener("click", function() {
+            overlay.style.display = "flex";
+        });
+    
+        menuChiudi.addEventListener("click", function() {
+            overlay.style.display = "none";
+        });
+    
+        overlay.style.display = "none";
+    });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const toggles = document.querySelectorAll('.dropdown > i');
+          toggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+              e.stopPropagation();
+              const menu = this.nextElementSibling;
+              menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+            });
+          });
+      
+          window.addEventListener('click', function() {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+              menu.style.display = 'none';
+            });
+          });
+        });
+      </script>
+
+<footer class="footer">
+    <div class="footer-top">
+        <div class="footer-logos">
+        
+                <div class="logo-duo">
+                  <img src="immagini/logo prince's cup-08.png" alt="Logo torneo" class="logo-footer">
+                  <span class="logo-x">×</span>
+                  <img src="immagini/FantaESA-04.png" alt="Logo esasport" class="logo-footer logo-societa">
+                </div>
+                <span>Progetto di <strong>FantaESASport</strong></span>
+              </div>
+              
+  
+      <div class="footer-contatti">
+        <!-- Instagram -->
+        <div class="dropdown">
+          <i class="fab fa-instagram" id="igToggle"></i>
+          <div class="dropdown-menu" id="igMenu">
+            <a href="https://www.instagram.com/ssd_esasport/" target="_blank">@SSDEsasport</a>
+            <a href="https://www.instagram.com/fantaesagonale/" target="_blank">@FantaEsagonale</a>
+            <a href="https://www.instagram.com/fantaesasport/" target="_blank">@FantaEsaSport</a>
+          </div>
+        </div>
+  
+        <!-- Telefono -->
+        <div class="dropdown">
+          <i class="fas fa-phone" id="phoneToggle"></i>
+          <div class="dropdown-menu" id="phoneMenu">
+            <a href="tel:+393285728817">+39 3285728817</a>
+            <a href="tel:+393271113808">+39 3271113808</a>
+          </div>
+        </div>
+  
+        <!-- Email -->
+        <a href="mailto: fantaesagonale@gmail.com" class="footer-icon">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      Designed by Alessia Buscema
+    </div>
+  </footer>
+</body>
+
+
+</html>

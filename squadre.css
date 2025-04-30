@@ -1,0 +1,583 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #000; /* Colore di sfondo per tutta la pagina */
+        color: white;
+        background-image: url('immagini/sfondo.jpg'); /* Immagine di sfondo, puoi cambiare il percorso */
+        background-size: cover; /* Adatta l'immagine per coprire tutta la pagina */
+        background-position: center; /* Centra l'immagine */
+        background-attachment: fixed; /* Fissa lo sfondo mentre scorri la pagina */
+        
+        min-height: 150vh;
+    }
+      .container-fluid {
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    .page-wrapper {
+      min-height: calc(100vh - 180px); /* Altezza footer stimata */
+    }
+    
+    .hidden {
+        display: none; /* Nasconde la homepage */
+        }
+    
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0));  
+        border-bottom: 1px solid b;
+        z-index: 998;
+        justify-content: space-between;
+    }
+    
+    .logo {
+        width:80px;
+        height:80px;
+        top: 20;
+        left: 30;
+        position: absolute;
+        } 
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 200px;  /* Imposta una larghezza massima per evitare che l'immagine diventi troppo grande */
+            height: auto;
+        }
+        
+    
+
+        /* QUESTA PARTE FUNZIONA */
+    
+            .x {
+                padding-bottom: 12px;
+                padding-right: 20px;
+                padding-left: 20px;
+                color: #ffffff;
+                text-decoration: none;
+                display: block;
+                z-index: 1101;
+            }
+                
+
+            .menu-apri {
+                float: right;
+                align-items: center;
+                background-color: transparent;
+                border: none;
+                z-index: 1100;
+            }
+            
+            #menu-apri {
+                position: relative;
+                background-color: transparent;
+                border: none;
+                font-size: 30pt;
+                color: #fff;
+                cursor: pointer;
+                top:10px;
+            }
+            
+            .burger {
+                font-size: 30pt;
+                color: #fff;
+                font-family: 'Poppins', sans-serif;
+                text-decoration: none;
+                padding-right: 5px;
+            }
+            
+            
+            .menu-apri a:hover {
+                text-decoration: none;
+            }
+            
+            .menu-chiudi {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                background: transparent;
+                border: none;
+                font-size: 40pt;
+                z-index: 1101;
+            }
+            
+            
+            .menu-chiudi a {
+                text-align: center;
+                transition: transform 0.3s ease;
+            }
+            
+            .menu-chiudi a:hover {
+                color: #ffa200;
+                text-decoration: none;
+            
+                    transform: rotate(90deg); /* Ruota la X di 90 gradi */
+            }
+            
+            
+            
+            /* MENU OVERLAY */
+            
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #000000;
+                z-index: 1000;
+                transition: width 0.3s ease;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 0 70px rgba(203, 203, 203, 0.522);
+                
+            }
+            
+            .container-overlay {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .menu {
+                text-align: center;
+            }
+            
+            .menu li {
+                list-style: none;
+                line-height: 2.5; /* Interlinea aumentata */
+               /* Spazio verticale aggiuntivo */
+            }
+            
+            .menu a {
+                color: #ffffff;
+                font-size: 27pt;
+                font-weight: thin;
+                text-decoration: none;
+                transition: transform 0.4s ease, color 0.4s ease;
+                display: inline-block;
+            }
+            
+            .menu a:hover {
+                padding-right: 25px;
+                color: #ffa200;
+                font-weight: bold;
+                transform: scale(1.1); /* Ingrandisce leggermente */
+            }
+
+            .voci-navigazione a {
+                text-decoration: none;
+                color: inherit;
+              }
+              .voci-navigazione a:hover {
+                color: #ff6600; /* colore quando ci passi sopra */
+                text-decoration: underline; /* oppure puoi evitarla anche qui */
+              }
+
+        /* INIZIA IL CODICE PER LA TABELLA */
+
+       
+          .container {
+            max-width: 800px;
+            margin: 120px auto 80px;
+            padding: 40px 30px;
+            border-radius: 16px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border: 1px solid black;
+            top: 120px;
+          }
+
+          .section-title {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #bdd7ef;
+            border: 1px solid #000;
+            border-radius: 15px;
+            padding: 20px 70px;
+            font-size: 18px;
+            font-weight: 700;
+            z-index: 5;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            color: #000000;
+          }
+          
+
+          
+          .team {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 16px;
+            margin: 8px 0;
+            padding: 4px 20px;
+            cursor: pointer;
+            position: relative;
+            background-color: rgba(255,255,255,0.7);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease-in-out;
+            color: #000000;
+            
+            
+          }
+          
+          .team:hover {
+            background-color: #ffb74aaf;
+          }
+          
+          .team-title {
+            padding: 10px 30px;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 600;
+            margin-left: 60px;
+            color: #000000;
+          }
+          
+          .team-number {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            font-weight: bold;
+          }
+          
+          .arrow {
+            margin-left: auto; /* Allinea la freccia a destra */
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: flex-end; /* Allinea la freccia orizzontalmente a destra */
+            margin-top: -18px; /* Alza la freccia leggermente */
+          }
+          
+          .arrow i {
+            font-size: 1.5em; /* Rende la freccia più fine */
+            transition: transform 0.3s ease;
+          }
+          
+          .arrow i.rotate {
+            transform: rotate(180deg); /* Ruota la freccia quando la sezione è aperta */
+          }
+          
+          .contenuto-tendina {
+            display: none;
+            padding: 10px;
+            background-color: #f8f9fa;
+          }
+      
+          .riga-tendina {
+            cursor: pointer;
+          }
+          
+          .players {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  padding: 0 20px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(240,240,240,0.9));
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 2;
+  border: 1px solid rgba(0,0,0,0.15);
+  margin: 10px 30px;
+}
+
+.team.open .players {
+  max-height: 1000px; /* abbastanza grande da contenere anche molte righe */
+  padding: 15px 20px;
+}
+
+.players ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.players li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  font-size: 16px;
+  color: #000000;
+}
+
+.players li:last-child {
+  border-bottom: none;
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+  .container {
+    width: 90%;
+    padding: 20px 15px;
+    margin-top: 40px;
+    border: 1px solid black; /* 👈 riaggiunto il bordo */
+  }
+
+  .team {
+    margin: 6px 0; /* meno spazio verticale */
+    padding: 4px 10px; /* 👈 padding ridotto: meno alto */
+    border-radius: 12px; /* se vuoi anche meno stondato */
+  }
+  .team-title {
+    text-align: left;
+    margin-left: 10px;
+    font-size: 12px; /* 👈 leggermente più piccolo */
+    font-weight: bold;
+  }
+
+  .team-number {
+    font-size: 14px; /* 👈 numero squadra più piccolo */
+  }
+
+  .arrow {
+    margin-top: -8px; /* 👈 sistemato l’allineamento della freccia */
+  }
+
+  .players {
+    margin: 10px 10px;
+    padding: 8px 12px;
+  }
+
+  .players li {
+    font-size: 13px; /* 👈 scritta giocatori più piccola */
+    padding: 6px 0;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 768px) {
+  header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  .logo {
+    width: 55px;
+    height: 55px;
+    position: static;
+  }
+
+  .header-title {
+    max-width: 120px;
+    height: auto;
+    position: static;
+    transform: none;
+  }
+
+  #menu-apri {
+    font-size: 22pt;
+    position: static;
+  }
+
+  .menu-apri {
+    display: flex;
+    align-items: center;
+  }
+  .burger {
+    font-size: 20pt;
+  }
+  .menu a {
+    font-size: 18pt;
+  }
+  .menu-chiudi {
+          
+      font-size: 25pt;
+  
+  }
+  .allenatore{
+    font-size: 6px;
+  }
+  .players .staff {
+    font-size: 12px; /* 👈 testo leggermente più piccolo da mobile */
+  }
+
+  .players .staff p strong {
+    font-size: 13px; /* 👈 anche il "Allenatore" e "Viceallenatore" più piccolo */
+  }
+}
+
+
+
+        /* footer*/
+
+        .footer {
+          background-color: #000; /* 👈 SFONDO NERO */
+          border-top-left-radius: 30px;
+          border-top-right-radius: 30px;
+          margin-top: 60px;
+          padding: 20px 15px 8px;
+          font-size: 12px;
+          color: #fff; /* 👈 TESTO BIANCO */
+          
+          box-shadow: 0 -2px 10px rgba(255,255,255,0.1);
+          text-align: center;
+        }
+        
+        .footer-top {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 15px;
+        }
+        
+        .footer-logos {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-direction: column;
+        }
+        
+        .logo-footer {
+          width: 45px;
+        }
+        
+        .logo-societa {
+          width: 70px; /* o quanto vuoi: 70px se vuoi un bel contrasto */
+        }
+        
+        .footer-contatti {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          font-size: 20px;
+          position: relative;
+        }
+        
+        .footer-icon {
+          color: #fff;
+          text-decoration: none;
+        }
+        .logo-duo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        
+        .logo-x {
+          font-size: 18px;
+          font-weight: 300;     /* più sottile */
+          color: #aaa;          /* grigio chiaro */
+        }
+        
+        
+        .dropdown {
+          position: relative;
+        }
+        
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          bottom: 30px; /* 👈 Invece di "top", usa "bottom" */
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #222;
+          border: 1px solid #555;
+          border-radius: 10px;
+          z-index: 999;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+          padding: 8px 12px;
+          min-width: 150px;
+          text-align: left;
+        }
+        
+        
+        .dropdown-menu a {
+          display: block;
+          color: #fff; /* 👈 SCRITTA BIANCA */
+          text-decoration: none;
+          padding: 5px 0;
+          font-size: 14px;
+        }
+        
+        .dropdown-menu a:hover {
+          color: #ffa200; /* 👈 Hover arancione */
+        }
+        
+        .footer-bottom {
+          margin-top: 20px;
+          font-size: 12px;
+          color: #aaa; /* 👈 Più chiaro sotto */
+        }
+        
+
+        @media (max-width: 768px) {
+          .footer {
+            padding: 10px 8px;
+            font-size: 10px;
+          }
+        
+          .footer-top {
+            flex-direction: column;
+            gap: 8px;
+          }
+        
+          .footer-logos {
+            flex-direction: column;
+            align-items: center;
+          }
+        
+          .logo-duo {
+            flex-direction: row;
+            gap: 6px;
+            justify-content: center;
+          }
+        
+          .logo-footer {
+            width: 28px;
+          }
+        
+          .logo-societa {
+            width: 35px;
+          }
+        
+          .logo-x {
+            font-size: 12px;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.4);
+          }
+        
+          .footer-contatti {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 16px;
+          }
+        
+          .dropdown-menu {
+            bottom: 30px;
+            min-width: 110px;
+            padding: 5px 8px;
+            font-size: 12px;
+          }
+        
+          .footer-bottom {
+            font-size: 9px;
+            margin-top: 10px;
+          }
+        }
+        .spazio-finale {
+          height: 100px;
+          width: 100%;
+        }
+      
