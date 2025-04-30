@@ -89,7 +89,7 @@ const datiPartite = {
   "2025-04-30": [
     { data: "30 Aprile - Gruppo A", squadra1: "SSD EsaSport", gol1: "-", squadra2: "DIblasi s.r.l.", gol2: "-", ora: "19:45" },
     { data: "30 Aprile - Gruppo A", squadra1: "Arti Casearie Nicastro", gol1: "-", squadra2: "Atletico Mirage", gol2: "-", ora: "20:45" },
-    { data: "30 Aprile - Gruppo A", squadra1: "FantaEsagonale", gol1: "-", squadra2: "StanleyBet", gol2: "-", ora: "21:45" }
+    { data: "30 Aprile - Gruppo A", squadra1: "FantaEsag.", gol1: "-", squadra2: "StanleyBet", gol2: "-", ora: "21:45" }
   ],
   "2025-05-02": [
     { data: "2 Maggio - Gruppo B", squadra1: "I Calatini", gol1: "-", squadra2: "Impresa Edile Marco Giandinoto", gol2: "-", ora: "19:45" },
@@ -236,14 +236,20 @@ function selezionaData(dataString) {
 
 function trovaDataProssima() {
   const oggi = new Date();
+  oggi.setHours(0, 0, 0, 0); // 👈 azzera ore, minuti, secondi
+
   for (let dataString of datePartite) {
-    if (new Date(dataString) >= oggi) {
-      return new Date(dataString);
+    const dataMatch = new Date(dataString);
+    dataMatch.setHours(0, 0, 0, 0); // 👈 anche qui
+
+    if (dataMatch >= oggi) {
+      return dataMatch;
     }
   }
-  return new Date(datePartite[0]);
-}
 
+  // Se nessuna data è nel futuro, torna l’ultima disponibile
+  return new Date(datePartite[datePartite.length - 1]);
+}
 function caricaPartite(dataString) {
   const partite = datiPartite[dataString] || [];
   blocchiGiornata.innerHTML = '';
