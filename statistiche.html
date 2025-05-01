@@ -44,10 +44,29 @@
 </div>
 </nav>
 <section class="statistiche-fake">
-    <button class="btn-statistiche">STATISTICHE</button>
-    <img src="immagini/statistiche-17-17-17-17-17-17-17.png" alt="Statistica Torneo" class="immagine-statistiche">
-  </section>
-  
+  <button class="btn-statistiche">STATISTICHE</button>
+
+  <div class="box-tabella">
+    <div class="gruppo-titolo">MARCATORI</div>
+    <div class="tabella-wrapper">
+      <table class="tabella-marcatori" id="tabellaMarcatori">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Giocatore</th>
+            <th>Squadra</th>
+            <th>Gol</th>
+            <th>So</th>
+            <th>Rigori</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
 
 </script>  
 <!-- Script per overlay menu -->
@@ -87,6 +106,31 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   </script>
+  <script>
+    fetch("marcatori.csv")
+      .then(response => response.text())
+      .then(text => {
+        const rows = text.trim().split("\n").slice(1); // rimuove intestazione
+        const tbody = document.querySelector("#tabellaMarcatori tbody");
+    
+        rows.forEach((row, index) => {
+          const cols = row.split(";");
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${cols[0]}</td>
+            <td>${cols[1]}</td>
+            <td>${cols[2]}</td>
+            <td>${cols[3]}</td>
+            <td>${cols[4]}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      });
+    </script>
+    
+  
+    
 <footer class="footer">
     <div class="footer-top">
         <div class="footer-logos">
