@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince's Cup - FantaEsaSport</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+   
+    
+   
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     
+    <link rel="stylesheet" href="statistiche.css">
+</head>
+<body>
+
+    <header class="container-fluid">
+        
+            <a href="index.html">
+                <img class="logo" src="immagini/logo prince's cup-08.png" alt="Logo" width="50" height="50">
+            </a>
+            
+            <img src="immagini/FantaESA-04.png" alt="FantaEsasport" class="header-title">
+            
+            <button id="menu-apri" class="menu-apri">
+                <a class="burger"><i class="fas fa-bars"></i></a>
+            </button>
+        
+    </header>
+
+<nav class="overlay">
+<div class="container-overlay">
+    <ul class="menu">
+        <li><a href="squadre.html">Squadre</a></li>
+        <li><a href="risultati.html">Risultati</a></li>
+        <li><a href="classifica.html">Classifica</a></li>
+        <li><a href="statistiche.html">Statistiche</a></li>
+        <li><a href="Regolamento Prince's Cup.pdf" target="_blank">Regolamento</a></li>
+    </ul>
+    <button id="menu-chiudi" class="menu-chiudi">
+        <a class="x">x</a>
+    </button>
+</div>
+</nav>
+
+<section class="statistiche-fake">
+  <button class="btn-statistiche">STATISTICHE</button>
+  <div id="contenitoreTabelle"></div>
+</section>
+
+
+ 
+<!-- Script per overlay menu -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const overlay = document.querySelector(".overlay");
+    const menuApri = document.getElementById("menu-apri");
+    const menuChiudi = document.querySelector(".x");
+
+    menuApri.addEventListener("click", function() {
+        overlay.style.display = "flex";
+    });
+
+    menuChiudi.addEventListener("click", function() {
+        overlay.style.display = "none";
+    });
+
+    overlay.style.display = "none";
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+fetch('file/classifiche.csv')
+    .then(response => response.text())
+    .then(text => {
+        const rows = text.trim().split('\n').map(row => row.split(','));
+
+        let outputHTML = `<div class="tabella-wrapper">
+                            <h2>Classifiche</h2>
+                            <table class="custom-table">`;
+
+        rows.forEach((row, rowIndex) => {
+            outputHTML += `<tr>`;
+            row.forEach(cell => {
+                if (rowIndex === 0) {
+                    outputHTML += `<th>${cell}</th>`;
+                } else {
+                    outputHTML += `<td>${cell}</td>`;
+                }
+            });
+            outputHTML += `</tr>`;
+        });
+
+        outputHTML += `</table></div>`;
+
+        document.getElementById('contenitoreTabelle').innerHTML = outputHTML;
+    });
+
+    .catch(err => console.error('Errore nel caricamento del file Excel:', err));
+</script>
+
+
+    
+  
+    
+<footer class="footer">
+    <div class="footer-top">
+        <div class="footer-logos">
+        
+                <div class="logo-duo">
+                  <img src="immagini/logo prince's cup-08.png" alt="Logo torneo" class="logo-footer">
+                  <span class="logo-x">×</span>
+                  <img src="immagini/FantaESA-04.png" alt="Logo esasport" class="logo-footer logo-societa">
+                </div>
+                <span>Progetto di <strong>FantaESASport</strong></span>
+              </div>
+              
+  
+      <div class="footer-contatti">
+        <!-- Instagram -->
+        <div class="dropdown">
+          <i class="fab fa-instagram" id="igToggle"></i>
+          <div class="dropdown-menu" id="igMenu">
+            <a href="https://www.instagram.com/ssd_esasport/" target="_blank">@SSDEsasport</a>
+            <a href="https://www.instagram.com/fantaesagonale/" target="_blank">@FantaEsagonale</a>
+            <a href="https://www.instagram.com/fantaesasport/" target="_blank">@FantaEsaSport</a>
+          </div>
+        </div>
+  
+        <!-- Telefono -->
+        <div class="dropdown">
+          <i class="fas fa-phone" id="phoneToggle"></i>
+          <div class="dropdown-menu" id="phoneMenu">
+            <a href="tel:+393285728817">+39 3285728817</a>
+            <a href="tel:+393271113808">+39 3271113808</a>
+          </div>
+        </div>
+  
+        <!-- Email -->
+        <a href="mailto: fantaesagonale@gmail.com" class="footer-icon">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      Designed by Alessia Buscema
+    </div>
+  </footer>
+</body>
