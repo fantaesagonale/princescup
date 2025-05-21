@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <script>
-fetch('file/classifiche.csv')
+fetch('file/Class')
     .then(response => response.text())
     .then(text => {
         const rows = text.trim().split('\n').map(row => row.split(','));
