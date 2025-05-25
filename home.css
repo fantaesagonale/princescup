@@ -264,8 +264,8 @@
       .voce2 { transform: rotate(5deg) translateY(-5px); }
       .voce3 { transform: rotate(-3deg) translateY(15px); }
       .voce4 { transform: rotate(6deg) translateY(-10px); }
-      .voce5 { transform: rotate(-3deg) translateY(15px); }
-      .voce6 { transform: rotate(-5deg) translateY(5px); }
+      .voce5 { transform: rotate(-5deg) translateY(5px); }
+      .voce6 { transform: rotate(6deg) translateY(-10px); }
       
       /* Hover effect: raddrizza e ingrandisce un po’ */
       .voce:hover {
