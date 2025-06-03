@@ -9,7 +9,17 @@
         background-size: cover; /* Adatta l'immagine per coprire tutta la pagina */
         background-position: center; /* Centra l'immagine */
         background-attachment: fixed; /* Fissa lo sfondo mentre scorri la pagina */
+
     }
+    body {
+      background-color: #000;
+      background-image: url('immagini/sfondo-10.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+    }
+    
       .container-fluid {
         margin-top: 0px;
         margin-left: 0px;
@@ -737,4 +747,11 @@
               font-size: 9px;
               margin-top: 10px;
             }
+          }
+
+          .page-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
           }
